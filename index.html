@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Vue JS</title>
+</head>
+<body>
+
+    <div id="app">
+        <div :style="styles"> <!-- estilização com vue -->
+
+            <input type="checkbox" :checked="themeBlack" id="themeBlack" name="themeBlack" @click="toogleTheme"> Tema Escuro
+
+            <h1>{{title}}</h1>
+            <p>{{ fullName }}</p>
+
+            <!-- Renderização condicional -->  
+            
+            <!-- Pegando os valor de product -->
+            <!-- <img v-bind:src="product.image" v-bind:alt="product.title" width="100px">
+            <strong v-if="product.stars > 0">{{product.stars}}</strong>  --><!-- Verificando se tem mais de zero estrelas, caso sim mostra, caso contrário nem carrega -->
+
+            <!-- <img :src="product2.image" :alt="product2.title" width="100px">
+            <strong v-show="product2.stars > 0">{{product2.stars}}</strong> --> <!-- caso não tenha mais de 0 estrelas apenas vai dar um display none -->
+
+            <!-- laço de repetição -->
+
+            <hr>
+            <h3>Carrinho ({{cart.length}})</h3>
+            
+
+            <ul>
+                <li v-for="(product, index) in products" :key="index"> <!-- colocando uma chave única para cada registro (recomendado pela documentação :key ou v-bind:key) -->
+                    <p>{{product.title}}</p>
+                    <img :src="product.image" :alt="product.title" width="100px">
+                    <strong v-if="product.stars > 0">{{product.stars}}</strong> 
+                    <button 
+                        href="#" 
+                        v-on:click.prevent="addCart(product)"
+                        :disabled="inCart(product)"
+                        :class="['color', {'button-disabled' : inCart(product)}]"> <!-- Passando classes normais e deoius as incluídas pelo Vue -->
+                        ADD CART
+                    </button> <!-- verifica se está no carrinho - caso sim, permite adicionar, caso não, habilita a opção de remover -->
+                </li>
+            </ul>
+
+
+            <div v-if="number == 2">Dois</div>
+            <div v-else-if="number == 3">três</div>
+            <div v-else>Desconhecido</div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="./app.js"></script>
+</body>
+</html>
